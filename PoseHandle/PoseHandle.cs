@@ -32,13 +32,13 @@ public class PoseHandle : IDisposable
         if (!isDisposed)
         {
             bool result = Kernel32.CloseHandle(handle);
-            if (!result)
+            if (result)
             {
-                Console.WriteLine("Error closing handle");
+                Console.WriteLine("Handle closed successfully.");
             }
             else
             {
-                Console.WriteLine("Handle closed successfully");
+                Console.WriteLine("Error closing handle");
             }
 
             handle = IntPtr.Zero;

@@ -7,20 +7,17 @@ class MainClass
 {
     static void Main(string[] args)
     {
-        IntPtr fileHandle = OpenFile("example.txt");
-        PoseHandle poseHandle = new PoseHandle(fileHandle);
-
-        if (poseHandle.Handle != IntPtr.Zero)
-        {
-            Console.WriteLine("File was successfully opened.");
-            poseHandle.Dispose();
-        }
-        else
-        {
-            Console.WriteLine("Error while opening file!");
-        }
-        
-        Console.WriteLine("Work with file ended.");
+       using (var poseHandle = new PoseHandle(OpenFile("example.txt")))
+       {
+           if (poseHandle.Handle != IntPtr.Zero)
+           {
+               Console.WriteLine("File was successfully opened.");
+           }
+           else
+           {
+               Console.WriteLine("Error while opening file!");
+           }
+       }
     }
 
     static IntPtr OpenFile(string filename)
